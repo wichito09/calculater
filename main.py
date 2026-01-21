@@ -1,15 +1,12 @@
-import sys
 import time
-# all the imports we need up here
-
-
 VERSION = 0.1
-    # never changing variables
 
-def logoV(): # stuff to know
-    print("""
+# 1. Define all your "tools" (functions) at the top
+def logoV():
+    # 'r' means "Raw" - ignores backslash mistakes
+    print(r"""
  /$$      /$$ /$$           /$$                  /$$$$$$   /$$$$$$ 
-| $$  /$ | $$|__/          | $$                 /$$$_  $$ /$$__  $$
+| $$   /$ | $$|__/          | $$                 /$$$_  $$ /$$__  $$
 | $$ /$$$| $$ /$$  /$$$$$$$| $$$$$$$   /$$$$$$ | $$$$\ $$| $$  \ $$
 | $$/$$ $$ $$| $$ /$$_____/| $$__  $$ /$$__  $$| $$ $$ $$|  $$$$$$$
 | $$$$_  $$$$| $$| $$      | $$  \ $$| $$  \ $$| $$\ $$$$ \____  $$
@@ -17,119 +14,71 @@ def logoV(): # stuff to know
 | $$/   \  $$| $$|  $$$$$$$| $$  | $$|  $$$$$$/|  $$$$$$/|  $$$$$$/
 |__/     \__/|__/ \_______/|__/  |__/ \______/  \______/  \______/ """)
     
+    # 'f' means "Fill-in-the-blanks"
     print(f"Version {VERSION}")
 
-logoV()
+def add(x, y): return x + y
+def sub(x, y): return x - y
+def mult(x, y): return x * y
+def div(x, y): return x / y
 
-time.sleep(2)
-
-def greeting(): # gretting the user and stuff
-    print("Hello this is a calculator")
-    print("You will enter an operation")
-    print("Then 2 numbers")
-    print("Enjoy!")
-
-greeting()
-
-def main():
-    oper = None
-    x = None
-    y = None
-    ans = None
-    # changing variables
-
-    
-
-    def add(x,y):
-        return(x + y)
-
-    def sub(x,y):
-        return(x - y)
-
-    def div(x,y):
-        if not y == 0:
-            return(x / y)
+def oper_ask():
+    valid_oper = ["add", "sub", "div", "mult"]
+    while True:
+        choice = input("Please input an operation (add, sub, mult, div): ").lower()      
+        if choice in valid_oper:
+            return choice
         else:
-            None
+            print("ERROR: Invalid operation. Try again.")
 
+def get_num(label):
+    while True:
+        val = input(f"Please input the {label} number: ")
+        try:
+            return int(val)
+        except ValueError:
+            print("ERROR: Not a number. Try again.")
 
-    def mult(x,y):
-        return(x * y)
-
-    # all the functions for the operations-----------
-
-    
-    time.sleep(2)
-
-    def oper_ask():
-        valid_oper = ["add", "sub", "div", "mult"]
-        while True:
-            oper = input("please input an operation(Ex. add, sub, mult, div): ")       
-            if oper in valid_oper:
-                print("you chose", oper,"as your operation!")
-                return(oper)
-            else:
-                print("ERROR, Invalid operation chosen. Try again")
-
-    oper = oper_ask()
+# 2. The logic part of your program
+def main():
+    logoV()
     time.sleep(1)
+    
+    print("Hello! Enter an operation and two numbers.\n")
+    
+    oper = oper_ask()
+    x = get_num("first")
+    
+    # Special check for division by zero
+    while True:
+        y = get_num("second")
+        if oper == "div" and y == 0:
+            print("ERROR: You cannot divide by zero! Pick a different second number.")
+        else:
+            break
 
-    def num1():
-        while True:
-            x = input("please input the first number!: ")
-            try:
-                x = int(x)
-                return(x)
-            except ValueError:
-                print("ERROR, not a number please enter a number")
-    x = num1()
-
-    def num2():
-        while True:
-            y = input("please input the seccond number!: ")
-            try:
-                y = int(y)
-                if y == 0 and oper == "div":
-                    print("ERROR, can't divide by zero")
-                else:
-                    return(y)
-            except ValueError:
-                print("ERROR, not a number please enter a number")
-
-    y = num2()
-
-    print("You chose to do",oper,". Your first number was",x,", the seccond one was", y,".")
+    print(f"You chose to {oper} {x} and {y}.")
+    
+    # Calculate the answer
     if oper == "add":
-        ans = add(x,y)
+        ans = add(x, y)
     elif oper == "sub":
-        ans = sub(x,y)
+        ans = sub(x, y)
     elif oper == "div":
-        ans = div(x,y)
+        ans = div(x, y)
     elif oper == "mult":
-        ans = mult(x,y)
-    else:
-        print("something broke :(")
+        ans = mult(x, y)
 
-    if oper == None or x == None or y == None:
-        print("something broke :0")
-    else:
-        print("thinking...")
-        time.sleep(1)
-        print("carring the 1...")
-        time.sleep(1)
-        print("doing it one more time...")
-        time.sleep(2)
-        print("The ansear is", ans)
-main()
+    print("Thinking...")
+    time.sleep(1)
+    print("Carrying the 1...")
+    time.sleep(1)
+    print(f"The answer is: {ans}\n")
 
-time.sleep(2)
-
+# 3. The "Keep Playing" loop
 while True:
-    user_input = input("Do you want to do another operation?(y/n): ")
-    if user_input == "y":
-        main()
-    elif user_input == "n":
-        print("bye bye")
+    main()
+    again = input("Do you want to do another operation? (y/n): ").lower()
+    if again != "y":
+        print("Goodbye!")
         break
-    else:
-        print("invalid input")
