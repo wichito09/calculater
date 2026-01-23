@@ -1,5 +1,5 @@
 import time
-VERSION = 0.1
+VERSION = 0.5
 
 # 1. Define all your "tools" (functions) at the top
 def logoV():
@@ -35,7 +35,7 @@ def get_num(label):
     while True:
         val = input(f"Please input the {label} number: ")
         try:
-            return int(val)
+            return float(val)
         except ValueError:
             print("ERROR: Not a number. Try again.")
 
