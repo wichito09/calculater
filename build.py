@@ -2,6 +2,8 @@ import subprocess
 import sys
 import os
 
+
+# instructions for first time using it, delete it after
 '''
 This is an application builder for python, below you can change the stuff to better suit your project, 
 down in the command varible you can change, delete, or add flags to better suit your needs. If your python
@@ -14,6 +16,15 @@ This code was MADE BY AI and not by me since I have no idea what subprocess is o
 
 you can copy this code and put it in your project folder. 
 '''
+# instructions for future use, DO NOT DELETE you may forget
+'''
+make sure flags suit your current needs, double check settings are okay, make sure your .py
+file where your main code is in is in the same folder as this file and the .ICO is also in the same said folder.
+
+Version 1.0 
+80% Ai - 15% me - 5% internet
+'''
+
 
 # --- SETTINGS ---
 SCRIPT_NAME = "main.py"  # add the script name you want to turn into a program Ex. ("main.py")
