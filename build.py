@@ -27,8 +27,10 @@ Version 1.0
 
 
 # --- SETTINGS ---
+current_folder_name = os.path.basename(os.getcwd())
+
 SCRIPT_NAME = "main.py"  # add the script name you want to turn into a program Ex. ("main.py")
-APP_NAME = "Simple_Calc" # The name of the app you want
+APP_NAME = current_folder_name # The name of the app 
 ICON_FILE = "calculaterPicture.ico" # The icon the app should have, .ico, has to be in same file as SCRIPT_NAME and this one
 # ----------------
 
