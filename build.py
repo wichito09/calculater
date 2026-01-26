@@ -12,7 +12,7 @@ def build_exe():
     if not os.path.exists(ICON_FILE):
         print(f"Warning: {ICON_FILE} not found. Build might fail or use default icon.")
 
-    # Construct the command
+    # Construct the commande
     command = [
         "python", "-m", "PyInstaller",
         "--onefile",              # Create a single EXE
