@@ -2,13 +2,26 @@ import subprocess
 import sys
 import os
 
+'''
+This is an application builder for python, below you can change the stuff to better suit your project, 
+down in the command varible you can change, delete, or add flags to better suit your needs. If your python
+project uses a GUI and not the console, you can replace the '--console' for 'noconsole', you can remove 
+the '--onefile' if your project needs other files. 
+
+THIS ONLY WORKS FOR PYTHON, I REAPEAT ONLY FOR PYTHON.
+
+This code was MADE BY AI and not by me since I have no idea what subprocess is or what sys or os does.
+
+you can copy this code and put it in your project folder. 
+'''
+
 # --- SETTINGS ---
-SCRIPT_NAME = "main.py"
-APP_NAME = "Simple_Calc"
-ICON_FILE = "calculaterPicture.ico"
+SCRIPT_NAME = "main.py"  # add the script name you want to turn into a program Ex. ("main.py")
+APP_NAME = "Simple_Calc" # The name of the app you want
+ICON_FILE = "calculaterPicture.ico" # The icon the app should have, .ico, has to be in same file as SCRIPT_NAME and this one
 # ----------------
 
-def ensure_pyinstaller():
+def ensure_pyinstaller(): # checks if pyinstaller is installed if not attempts to install it
     try:
         import PyInstaller
         print("PyInstaller is already installed.")
@@ -22,24 +35,23 @@ def ensure_pyinstaller():
             print(f"Failed to install PyInstaller: {e}")
             sys.exit(1)
 
-def build_exe():
+def build_exe(): # builds the app
     ensure_pyinstaller()
 
-    if not os.path.exists(ICON_FILE):
+    if not os.path.exists(ICON_FILE): # checks if icon_file exist
         print(f"Warning: {ICON_FILE} not found. Proceeding without custom icon.")
         icon_flag = []
     else:
         icon_flag = [f"--icon={ICON_FILE}"]
 
-    # Note: Using --console because your app uses input() 
-    # This prevents the 'lost sys.stdin' error.
+   
     command = [
         sys.executable, "-m", "PyInstaller",
         "--onefile",
         "--console", 
         f"--name={APP_NAME}",
         "--clean"
-    ] + icon_flag + [SCRIPT_NAME]
+    ] + icon_flag + [SCRIPT_NAME] # puts the command all together
 
     print(f"\nBuilding {APP_NAME}...")
     result = subprocess.run(command)
