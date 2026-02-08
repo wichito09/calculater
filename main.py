@@ -18,13 +18,15 @@ def check_for_updates(current_version, repo_owner, repo_name):
         latest_version = data['tag_name'].lstrip('v')
         
         if latest_version != current_version:
+ 
             return True, data['html_url']
             
     except Exception:
         # Silently fail so the user isn't interrupted by network errors
         pass
-        
+
     return False, None
+    
 
 
 __version__ = "1.5.0"
